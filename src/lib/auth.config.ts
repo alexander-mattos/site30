@@ -32,15 +32,13 @@ export const authConfig = {
         async session({ session, token }) {
             if (token.sub && session.user) {
                 session.user.id = token.sub
-                // @ts-ignore
-                session.user.role = token.role
+                session.user.role = token.role as any
             }
             return session
         },
         async jwt({ token, user }) {
             if (user && user.id) {
                 token.sub = user.id.toString()
-                // @ts-ignore
                 token.role = user.role
             }
             return token
