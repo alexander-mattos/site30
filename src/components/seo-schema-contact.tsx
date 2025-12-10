@@ -45,7 +45,7 @@ export function SeoSchemaContact({
             {
                 "@type": "ContactPoint",
                 "@id": `${baseUrl}#main-contact`,
-                telephone: telephone || "+55-00-0000-0000",
+                telephone: telephone || "+55-21-4121-6120",
                 email: email || "contato@integroseguros.com.br",
                 contactType: "customer service",
                 areaServed: "BR",

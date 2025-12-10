@@ -16,7 +16,7 @@ export const metadata = {
         siteName: "Integro Seguros",
         images: [
             {
-                url: "/og-image.jpg", // deixe assim, depois criamos sua imagem oficial
+                url: "/og-image.png",
                 width: 1200,
                 height: 630,
             },

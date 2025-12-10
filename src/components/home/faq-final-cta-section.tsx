@@ -69,7 +69,7 @@ export default function FaqFinalCtaSection() {
                     funcionarios: formData.get("funcionarios"),
                 };
             } else {
-                url = "/api/leads/contato";
+                url = "/api/leads/contatos";
                 body = {
                     nome: formData.get("nome"),
                     whatsapp: formData.get("whatsapp"),

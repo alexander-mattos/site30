@@ -25,7 +25,7 @@ export function ContactForm() {
         const mensagem = (formData.get("mensagem") as string) || "";
 
         try {
-            const res = await fetch("/api/leads/contato-geral", {
+            const res = await fetch("/api/leads/contatos", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ nome, telefone, email, mensagem }),
