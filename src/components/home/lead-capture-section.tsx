@@ -268,7 +268,7 @@ const LeadCaptureSection = () => {
                                         htmlFor="email-prof"
                                         className="text-xs font-medium text-[#333]"
                                     >
-                                        E-mail (opcional)
+                                        E-mail
                                     </label>
                                     <Input
                                         id="email-prof"
