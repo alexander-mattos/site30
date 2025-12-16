@@ -8,6 +8,9 @@ import { MessageCircle, Mail, PhoneCall } from "lucide-react";
 import { SeoSchemaContact } from "@/components/seo-schema-contact";
 import { ContactForm } from "@/components/contato/ContactForm";
 
+const SITE =
+    process.env.NEXT_PUBLIC_SITE_URL || "https://integroseguros.com.br";
+
 export const metadata: Metadata = {
     title: "Contato | Integro Seguros",
     description:
@@ -32,7 +35,7 @@ export default function ContatoPage() {
             <SeoSchemaContact
                 title={title}
                 description={description}
-                urlPath="/contato"
+                urlPath={`${SITE}/contato`}
                 telephone={telefoneSchema}
                 email={email}
             />

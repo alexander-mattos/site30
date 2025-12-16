@@ -13,6 +13,9 @@ import { Metadata } from "next";
 import { SeoSchemaAbout } from "@/components/seo-schema-about";
 import { Breadcrumbs } from "@/components/navigation/Breadcrumbs";
 
+const SITE =
+    process.env.NEXT_PUBLIC_SITE_URL || "https://integroseguros.com.br";
+
 export const metadata: Metadata = {
     title: "Sobre a Integro Seguros | Corretora e Assessoria em Seguros",
     description:
@@ -22,14 +25,14 @@ export const metadata: Metadata = {
 export default function SobrePage() {
     const title = "Sobre a Integro Seguros";
     const description =
-        "Corretora e assessoria especializada em riscos profissionais e empresariais, com atendimento consultivo e atuação em todo o Brasil.";
+        "A Integro Seguros atua com foco em riscos profissionais e empresariais, oferecendo atendimento consultivo em todo o Brasil.";
 
     return (
         <>
             <SeoSchemaAbout
                 title={title}
                 description={description}
-                urlPath="/sobre"
+                urlPath={`${SITE}/sobre`}
             />
 
             <main className="max-w-6xl mx-auto px-4 py-10 md:py-16 space-y-12 md:space-y-16">

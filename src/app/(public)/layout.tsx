@@ -3,6 +3,7 @@ import { Footer } from "@/components/layout/Footer";
 import { TopBar } from "@/components/layout/TopBar";
 import { FloatingActions } from "@/components/layout/FloatingActions";
 import { ChatWootUserBinding } from "@/components/integrations/ChatWootUserBinding";
+import { ChatProvider } from "@/context/chat-context";
 
 export const metadata = {
     title: "Integro Seguros – Seguros para profissionais e empresas",
@@ -36,13 +37,15 @@ export default function PublicLayout({
     children: React.ReactNode;
 }) {
     return (
-        <div className="flex min-h-screen flex-col">
-            <TopBar />
-            <Header />
-            <main className="flex-1">{children}</main>
-            <Footer />
-            <ChatWootUserBinding />
-            <FloatingActions />
-        </div>
+        <ChatProvider>
+            <div className="flex min-h-screen flex-col">
+                <TopBar />
+                <Header />
+                <main className="flex-1">{children}</main>
+                <Footer />
+                <ChatWootUserBinding />
+                <FloatingActions />
+            </div>
+        </ChatProvider>
     );
 }

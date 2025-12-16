@@ -10,6 +10,16 @@ import {
     FileText,
 } from "lucide-react";
 import { SeoSchemaService } from "@/components/seo-schema-service";
+import { Metadata } from "next";
+
+const SITE =
+    process.env.NEXT_PUBLIC_SITE_URL || "https://integroseguros.com.br";
+
+export const metadata: Metadata = {
+    title: "Para empresas | Integro Seguros",
+    description:
+        "Consultoria em seguros para empresas de diversos portes, incluindo seguro empresarial, frota, vida em grupo, responsabilidade civil e programas integrados de proteção.",
+};
 
 export default function ParaEmpresasPage() {
     return (
@@ -17,7 +27,7 @@ export default function ParaEmpresasPage() {
             <SeoSchemaService
                 serviceName="Seguros para empresas"
                 serviceDescription="Consultoria em seguros para empresas de diversos portes, incluindo seguro empresarial, frota, vida em grupo, responsabilidade civil e programas integrados de proteção."
-                urlPath="/para-empresas"
+                urlPath={`${SITE}/para-empresas`}
                 faqItems={[]}
                 providerName="Integro Seguros"
                 areaServed="Brasil"

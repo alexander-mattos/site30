@@ -9,6 +9,16 @@ import {
     ClipboardList,
 } from "lucide-react";
 import { SeoSchemaService } from "@/components/seo-schema-service";
+import { Metadata } from "next";
+
+const SITE =
+    process.env.NEXT_PUBLIC_SITE_URL || "https://integroseguros.com.br";
+
+export const metadata: Metadata = {
+    title: "Para profissionais liberais | Integro Seguros",
+    description:
+        "Consultoria em seguros para profissionais liberais e autônomos, com foco em responsabilidade civil profissional, vida, equipamentos e proteção de consultórios e escritórios.",
+};
 
 export default function ParaProfissionaisPage() {
     return (
@@ -16,7 +26,7 @@ export default function ParaProfissionaisPage() {
             <SeoSchemaService
                 serviceName="Seguros para profissionais liberais"
                 serviceDescription="Consultoria em seguros para profissionais liberais e autônomos, com foco em responsabilidade civil profissional, vida, equipamentos e proteção de consultórios e escritórios."
-                urlPath="/para-profissionais"
+                urlPath={`${SITE}/para-profissionais`}
                 faqItems={[]}
                 providerName="Integro Seguros"
                 areaServed="Brasil"

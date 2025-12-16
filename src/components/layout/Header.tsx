@@ -37,7 +37,7 @@ export function Header() {
                 {/* LOGO */}
                 <Link href="/" className="flex items-center gap-2">
                     <Image
-                        src="/logos/logo-integro.svg"
+                        src="/logos/logo-light.svg"
                         alt="Integro Seguros"
                         width={260}
                         height={80}

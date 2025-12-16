@@ -1,3 +1,4 @@
+
 import { Metadata } from "next";
 import { MotionSection } from "@/components/ui/motion-section";
 import { AnimatedCard } from "@/components/ui/animated-card";
@@ -12,6 +13,7 @@ import {
 } from "lucide-react";
 import { SeoSchemaService } from "@/components/seo-schema-service";
 import { Breadcrumbs } from "@/components/navigation/Breadcrumbs";
+import { ChatRCProfissionalButton } from "@/components/actions/rc-profissional-button";
 
 export const metadata: Metadata = {
     title: "Seguro de Responsabilidade Civil Profissional | Integro Seguros",
@@ -50,6 +52,7 @@ const faqItems = [
 ];
 
 export default function RcProfissionalPage() {
+
     return (
         <>
             {/* SEO estruturado: Service + FAQ + Breadcrumb */}
@@ -177,6 +180,9 @@ export default function RcProfissionalPage() {
                                 </div>
                             </div>
                         </AnimatedCard>
+                        <div className="mt-6">
+                            <ChatRCProfissionalButton />
+                        </div>
                     </div>
                 </MotionSection>
 

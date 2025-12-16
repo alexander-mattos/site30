@@ -1,18 +1,23 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ArrowUp, Headset, MessageCircle } from "lucide-react";
-import Link from "next/link";
-import { useChatWoot } from "@/hooks/useChatWoot";
+import { ArrowUp, MessageCircle } from "lucide-react";
+import { useChatContext } from "@/context/chat-context";
 import {
     Tooltip,
     TooltipContent,
     TooltipProvider,
     TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { trackWhatsAppClick, trackGAEvent, trackMetaEvent } from "@/lib/tracking";
+import { Button } from "../ui/button";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+
+const whatsappUrl = process.env.NEXT_PUBLIC_WHATSAPP_URL || "#";
 
 export function FloatingActions() {
     const [visible, setVisible] = useState(false);
+    const { isReady: chatReady, openContatoGeral } = useChatContext();
 
     useEffect(() => {
         const onScroll = () => {
@@ -33,7 +38,19 @@ export function FloatingActions() {
         }
     };
 
-    const { isReady: chatReady, toggle: toggleChat } = useChatWoot();
+    // 🔹 Clique de WhatsApp com tracking
+    const handleWhatsAppClick = () => {
+        trackWhatsAppClick("floating_actions");
+        if (whatsappUrl && whatsappUrl !== "#") {
+            window.open(whatsappUrl, "_blank");
+        }
+    };
+
+    // (Opcional) tracking pro chat online
+    const handleChatClick = () => {
+        if (!chatReady) return;
+        openContatoGeral("floating_actions");
+    };
 
     if (!visible) return null;
 
@@ -43,9 +60,9 @@ export function FloatingActions() {
                 {/* Botão Chat Online (ChatWoot) */}
                 <Tooltip>
                     <TooltipTrigger asChild>
-                        <button
+                        <Button
                             type="button"
-                            onClick={toggleChat}
+                            onClick={handleChatClick}
                             disabled={!chatReady}
                             className={`flex items-center justify-center w-15 h-15 rounded-full shadow-lg transition-all cursor-pointer ${chatReady
                                 ? "bg-[#890b23] hover:bg-[#6d081b] hover:scale-105"
@@ -53,26 +70,28 @@ export function FloatingActions() {
                                 }`}
                             aria-label="Abrir chat online"
                         >
-                            <Headset className="w-5 h-5 text-white" />
-                        </button>
+                            <Avatar className="h-6 w-6">
+                                <AvatarImage src="/logos/icon-inverted.svg" />
+                                <AvatarFallback>Integro</AvatarFallback> {/* Texto alternativo/fallback */}
+                            </Avatar>
+                        </Button>
                     </TooltipTrigger>
                     <TooltipContent side="left" className="text-xs">
                         Chat online com um especialista
                     </TooltipContent>
                 </Tooltip>
 
-                {/* Botão WhatsApp */}
+                {/* Botão WhatsApp com tracking */}
                 <Tooltip>
                     <TooltipTrigger asChild>
-                        <Link
-                            href="https://wa.me/552141216120"
-                            target="_blank"
+                        <button
+                            type="button"
+                            onClick={handleWhatsAppClick}
                             aria-label="Fale com a Integro Seguros no WhatsApp"
+                            className="rounded-full bg-[#25D366] text-white shadow-lg p-3 md:p-3.5 flex items-center justify-center hover:scale-105 transition-transform"
                         >
-                            <div className="rounded-full bg-[#25D366] text-white shadow-lg p-3 md:p-3.5 flex items-center justify-center hover:scale-105 transition-transform">
-                                <MessageCircle className="w-5 h-5 md:w-6 md:h-6" />
-                            </div>
-                        </Link>
+                            <MessageCircle className="w-5 h-5 md:w-6 md:h-6" />
+                        </button>
                     </TooltipTrigger>
                     <TooltipContent side="left" className="text-xs">
                         Falar no WhatsApp

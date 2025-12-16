@@ -12,7 +12,7 @@ export function Footer() {
                     {/* Marca / texto institucional */}
                     <div className="space-y-3">
                         <Image
-                            src="/logos/logo_light.svg"
+                            src="/logos/logo-dark.svg"
                             alt="Integro Seguros"
                             width={160}
                             height={40}

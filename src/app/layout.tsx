@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
+import { AnalyticsScripts } from "@/components/analytics/analytics-scripts";
 import type { ReactNode } from "react";
 import { AuthProvider } from "@/components/auth/AuthProvider";
 import { Poppins, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { ChatWidget } from "@/components/integrations/ChatWidget";
-
 
 export const poppins = Poppins({
   subsets: ["latin"],
@@ -103,6 +103,7 @@ export default function RootLayout({
       <body className={`${poppins.variable} ${playfair.variable} antialiased`}>
         <AuthProvider>
           {children}
+          <AnalyticsScripts />
 
           {/* Script SDK ChatWoot */}
           <ChatWidget />

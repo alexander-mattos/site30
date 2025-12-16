@@ -6,8 +6,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { trackContactSubmit } from "@/lib/tracking";
 
-export function ContactForm() {
+export function ContactForm({ origin = "contato_page" }: { origin?: string }) {
     const [loading, setLoading] = useState(false);
     const [msgFeedback, setMsgFeedback] = useState<string | null>(null);
 
@@ -42,6 +43,9 @@ export function ContactForm() {
                     "Recebemos sua mensagem! Em breve entraremos em contato."
                 );
                 form.reset();
+
+                // 🔹 dispara evento de analytics
+                trackContactSubmit(origin);
             }
         } catch (error) {
             setMsgFeedback("Erro de conexão. Tente novamente.");

@@ -13,12 +13,15 @@ import {
 } from "lucide-react";
 import { Breadcrumbs } from "@/components/navigation/Breadcrumbs";
 import { Button } from "@/components/ui/button";
-import { SeoSchemaService } from "@/components/seo-schema-service";
+import { SeoSchemaPage } from "@/components/seo-schema-page";
+
+const SITE =
+    process.env.NEXT_PUBLIC_SITE_URL || "https://integroseguros.com.br";
 
 export const metadata: Metadata = {
     title: "Seguros para Profissionais e Empresas | Integro Seguros",
     description:
-        "Conheça as principais soluções de seguros da Integro para profissionais liberais, empresas e operações que levam gestão de risco a sério.",
+        "Conheça as soluções de seguros estruturadas para profissionais liberais e empresas, incluindo RC Profissional, Empresarial, Frota e Vida em Grupo.",
 };
 
 export default function SegurosPage() {
@@ -28,14 +31,11 @@ export default function SegurosPage() {
 
     return (
         <>
-            <SeoSchemaService
-                serviceName="Consultoria em seguros para profissionais e empresas"
-                serviceDescription="Página hub das principais soluções da Integro Seguros para profissionais liberais e empresas, com visão consultiva de gestão de riscos e proteção patrimonial."
-                urlPath="/seguros"
-                faqItems={[]} // mantemos vazio aqui
-                providerName="Integro Seguros"
-                areaServed="Brasil"
-                serviceType="InsuranceAgency"
+            <SeoSchemaPage
+                type="WebPage"
+                title="Seguros para profissionais e empresas | Integro Seguros"
+                description="Hub de seguros com soluções especializadas em riscos profissionais e empresariais."
+                url={`${SITE}/seguros`}
             />
 
             {/* Conteúdo principal */}
