@@ -1,6 +1,6 @@
 // src/components/seo-schema-page.tsx
 type SeoSchemaPageProps = {
-    type?: "WebPage" | "AboutPage" | "ContactPage";
+    type?: "WebPage" | "AboutPage" | "ContactPage" | "InsurancePage";
     title: string;
     description: string;
     url: string;
@@ -25,7 +25,7 @@ export function SeoSchemaPage({
             type="application/ld+json"
             suppressHydrationWarning
             dangerouslySetInnerHTML={{
-                __html: JSON.stringify(jsonLd),
+                __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c'),
             }}
         />
     );

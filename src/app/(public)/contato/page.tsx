@@ -15,6 +15,40 @@ export const metadata: Metadata = {
     title: "Contato | Integro Seguros",
     description:
         "Canal de contato da Integro Seguros para qualquer tipo de seguro: automóvel, residencial, empresarial, vida, frota ou responsabilidade civil profissional.",
+    keywords: "contato, integro seguros, seguro, seguros, seguros de automóvel, seguros de residencial, seguros de empresarial, seguros de vida, seguros de frota, seguros de responsabilidade civil profissional, seguros de responsabilidade civil empresarial, seguros de responsabilidade civil",
+    alternates: {
+        canonical: "/contato",
+    },
+    openGraph: {
+        type: "website",
+        locale: "pt_BR",
+        url: "https://www.integroseguros.com.br/contato",
+        images: [
+            {
+                url: "https://www.integroseguros.com.br/images/og/og-image.png",
+                width: 1200,
+                height: 630,
+                alt: "Integro Seguros",
+            },
+        ],
+        siteName: "Integro Seguros",
+        title: "Contato | Integro Seguros",
+        description: "Canal de contato da Integro Seguros para qualquer tipo de seguro: automóvel, residencial, empresarial, vida, frota ou responsabilidade civil profissional.",
+    },
+    robots: {
+        index: true,
+        follow: true,
+        nocache: true,
+        googleBot: {
+            index: true,
+            follow: true,
+            nocache: true,
+        },
+    },
+    icons: {
+        icon: "/favicon.ico",
+        apple: "/apple-touch-icon.png",
+    },
 };
 
 export default function ContatoPage() {

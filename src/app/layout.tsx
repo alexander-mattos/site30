@@ -28,6 +28,7 @@ export const metadata: Metadata = {
   },
   description:
     "Corretora de seguros especializada em profissionais liberais e empresas em todo o Brasil. Seguro empresarial, responsabilidade civil profissional, vida, frota e muito mais.",
+  keywords: "corretora de seguros, seguros empresariais, seguros profissionais, seguros de vida, seguros de frota, seguros de responsabilidade civil profissional, seguros de responsabilidade civil empresarial, seguros de responsabilidade civil",
   alternates: {
     canonical: "/",
   },
@@ -35,6 +36,14 @@ export const metadata: Metadata = {
     type: "website",
     locale: "pt_BR",
     url: "https://www.integroseguros.com.br",
+    images: [
+      {
+        url: "https://www.integroseguros.com.br/images/og/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Integro Seguros",
+      },
+    ],
     siteName: "Integro Seguros",
     title: "Integro Seguros | Corretora de Seguros para Profissionais e Empresas",
     description:
@@ -55,7 +64,7 @@ const organizationJsonLd = {
   "@type": "InsuranceAgency",
   name: "Integro Seguros",
   url: "https://www.integroseguros.com.br",
-  logo: "https://www.integroseguros.com.br/logo.png",
+  logo: "https://www.integroseguros.com.br/logos/logo-light.svg",
   telephone: "+55-21-4121-6120",
   address: {
     "@type": "PostalAddress",

@@ -11,13 +11,12 @@ export const metadata = {
         "Seguros sob medida para profissionais liberais e empresas. RC Profissional, Empresarial, Vida em Grupo e Frota. Atendimento consultivo em todo o Brasil.",
     openGraph: {
         title: "Integro Seguros – Seguros para profissionais e empresas",
-        description:
-            "Proteção profissional e empresarial com atendimento consultivo.",
+        description: "Proteção profissional e empresarial com atendimento consultivo.",
         url: "https://www.integroseguros.com.br",
         siteName: "Integro Seguros",
         images: [
             {
-                url: "/og-image.png",
+                url: "/images/og/og-image.png",
                 width: 1200,
                 height: 630,
             },
@@ -27,6 +26,20 @@ export const metadata = {
     },
     alternates: {
         canonical: "https://www.integroseguros.com.br",
+    },
+    robots: {
+        index: true,
+        follow: true,
+        nocache: true,
+        googleBot: {
+            index: true,
+            follow: true,
+            nocache: true,
+        },
+    },
+    icons: {
+        icon: "/favicon.ico",
+        apple: "/apple-touch-icon.png",
     },
 };
 

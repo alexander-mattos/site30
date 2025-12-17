@@ -35,7 +35,7 @@ export async function POST(request: Request) {
             whatsapp,
             email,
             mensagem,
-            fonte: fonteFromBody || "site-integro-faq",
+            fonte: fonteFromBody || "site-integro-contato",
             createdAt: new Date().toISOString(),
         };
 

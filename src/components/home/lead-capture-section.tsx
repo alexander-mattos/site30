@@ -2,20 +2,33 @@
 
 import { useState } from "react";
 import type { FormEvent } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import {
     MessageCircle,
     ShieldCheck,
-    ArrowRight,
     Clock,
     UserCheck,
     Building2,
 } from "lucide-react";
+import { GenericField, GenericForm } from "../ui/generic-form";
+
+const camposProf: GenericField[] = [
+    { name: 'nome', id: 'nome-prof', label: 'Nome completo', required: true },
+    { name: 'profissao', id: 'profissao', label: 'Profissão', required: true },
+    { name: 'whatsapp', id: 'whatsapp-prof', label: 'WhatsApp', type: 'tel', required: true },
+    { name: 'email', id: 'email-prof', label: 'E‑mail', type: 'email' },
+    { name: 'contexto', id: 'contexto-prof', label: 'Conte rapidamente como funciona sua atividade', type: 'textarea' },
+];
+
+const camposEmp: GenericField[] = [
+    { name: "empresa", id: "empresa", label: "Nome da empresa", required: true, placeholder: "Razão social ou nome fantasia" },
+    { name: "segmento", id: "segmento", label: "Segmento", required: true, placeholder: "Ex.: clínica, escritório, indústria..." },
+    { name: "funcionarios", id: "funcionarios", label: "Nº aproximado de funcionários", required: true, placeholder: "Ex.: 5, 20, 50+" },
+    { name: "whatsapp", id: "whatsapp-emp", label: "WhatsApp", type: "tel", required: true, placeholder: "(00) 00000‑0000" },
+    { name: "email", id: "email-emp", label: "E‑mail (opcional)", type: "email", placeholder: "contato@empresa.com" },
+    { name: "contexto", id: "contexto-emp", label: "Resuma rapidamente sua operação", type: "textarea", placeholder: "Ex.: Temos 2 unidades, frota própria..." },
+];
 
 const LeadCaptureSection = () => {
-    // estados simples de controle de envio (os mesmos da versão anterior)
     const [loadingProf, setLoadingProf] = useState(false);
     const [loadingEmp, setLoadingEmp] = useState(false);
     const [msgProf, setMsgProf] = useState<string | null>(null);
@@ -210,249 +223,24 @@ const LeadCaptureSection = () => {
 
                     {/* FORMULÁRIO PROFISSIONAL LIBERAL */}
                     {activeType === "prof" && (
-                        <form
-                            onSubmit={handleProfSubmit}
-                            className="space-y-4 text-sm"
-                            noValidate
-                        >
-                            <div className="space-y-1">
-                                <label
-                                    htmlFor="nome-prof"
-                                    className="text-xs font-medium text-[#333]"
-                                >
-                                    Nome completo
-                                </label>
-                                <Input
-                                    id="nome-prof"
-                                    name="nome"
-                                    required
-                                    placeholder="Como você prefere ser chamado(a)?"
-                                    className="bg-neutral-50 border-neutral-200 focus-visible:ring-[#890b23]"
-                                />
-                            </div>
-
-                            <div className="space-y-1">
-                                <label
-                                    htmlFor="profissao"
-                                    className="text-xs font-medium text-[#333]"
-                                >
-                                    Sua profissão ou especialidade
-                                </label>
-                                <Input
-                                    id="profissao"
-                                    name="profissao"
-                                    required
-                                    placeholder="Ex.: dentista, médico, advogado, engenheiro..."
-                                    className="bg-neutral-50 border-neutral-200 focus-visible:ring-[#890b23]"
-                                />
-                            </div>
-
-                            <div className="grid gap-4 md:grid-cols-2">
-                                <div className="space-y-1">
-                                    <label
-                                        htmlFor="whatsapp-prof"
-                                        className="text-xs font-medium text-[#333]"
-                                    >
-                                        WhatsApp
-                                    </label>
-                                    <Input
-                                        id="whatsapp-prof"
-                                        name="whatsapp"
-                                        required
-                                        placeholder="(00) 00000-0000"
-                                        className="bg-neutral-50 border-neutral-200 focus-visible:ring-[#890b23]"
-                                    />
-                                </div>
-                                <div className="space-y-1">
-                                    <label
-                                        htmlFor="email-prof"
-                                        className="text-xs font-medium text-[#333]"
-                                    >
-                                        E-mail
-                                    </label>
-                                    <Input
-                                        id="email-prof"
-                                        name="email"
-                                        type="email"
-                                        placeholder="seuemail@exemplo.com"
-                                        className="bg-neutral-50 border-neutral-200 focus-visible:ring-[#890b23]"
-                                    />
-                                </div>
-                            </div>
-
-                            <div className="space-y-1">
-                                <label
-                                    htmlFor="contexto-prof"
-                                    className="text-xs font-medium text-[#333]"
-                                >
-                                    Conte rapidamente como funciona sua atividade
-                                </label>
-                                <Textarea
-                                    id="contexto-prof"
-                                    name="contexto"
-                                    placeholder="Ex.: Atendo em consultório próprio, faço plantões, tenho 2 funcionários..."
-                                    className="min-h-[80px] bg-neutral-50 border-neutral-200 focus-visible:ring-[#890b23] text-xs"
-                                />
-                            </div>
-
-                            <div className="space-y-2 pt-1">
-                                <Button
-                                    type="submit"
-                                    disabled={loadingProf}
-                                    className="w-full bg-[#890b23] hover:bg-[#6d081b] text-white inline-flex items-center justify-center gap-2"
-                                >
-                                    {loadingProf ? (
-                                        "Enviando..."
-                                    ) : (
-                                        <>
-                                            Quero falar com um especialista
-                                            <ArrowRight className="w-4 h-4" />
-                                        </>
-                                    )}
-                                </Button>
-                                {msgProf && (
-                                    <p className="text-[11px] text-[#555] leading-snug">
-                                        {msgProf}
-                                    </p>
-                                )}
-                                <p className="text-[10px] text-[#777] leading-snug">
-                                    Seus dados serão usados apenas para contato relacionado a seguros
-                                    profissionais, conforme nossa política de privacidade.
-                                </p>
-                            </div>
-                        </form>
+                        <GenericForm
+                            fields={camposProf}
+                            endpoint="/api/leads/profissionais"
+                            origin="home_profissional"
+                            trackingType="lead"
+                            successMessage="Recebemos seus dados! Em breve entraremos em contato."
+                        />
                     )}
 
                     {/* FORMULÁRIO EMPRESA */}
                     {activeType === "emp" && (
-                        <form
-                            onSubmit={handleEmpSubmit}
-                            className="space-y-4 text-sm"
-                            noValidate
-                        >
-                            <div className="space-y-1">
-                                <label
-                                    htmlFor="empresa"
-                                    className="text-xs font-medium text-[#333]"
-                                >
-                                    Nome da empresa
-                                </label>
-                                <Input
-                                    id="empresa"
-                                    name="empresa"
-                                    required
-                                    placeholder="Razão social ou nome fantasia"
-                                    className="bg-neutral-50 border-neutral-200 focus-visible:ring-[#890b23]"
-                                />
-                            </div>
-
-                            <div className="grid gap-4 md:grid-cols-2">
-                                <div className="space-y-1">
-                                    <label
-                                        htmlFor="segmento"
-                                        className="text-xs font-medium text-[#333]"
-                                    >
-                                        Segmento
-                                    </label>
-                                    <Input
-                                        id="segmento"
-                                        name="segmento"
-                                        required
-                                        placeholder="Ex.: clínica, escritório, indústria, logística..."
-                                        className="bg-neutral-50 border-neutral-200 focus-visible:ring-[#890b23]"
-                                    />
-                                </div>
-                                <div className="space-y-1">
-                                    <label
-                                        htmlFor="funcionarios"
-                                        className="text-xs font-medium text-[#333]"
-                                    >
-                                        Nº aproximado de funcionários
-                                    </label>
-                                    <Input
-                                        id="funcionarios"
-                                        name="funcionarios"
-                                        required
-                                        placeholder="Ex.: 5, 20, 50+"
-                                        className="bg-neutral-50 border-neutral-200 focus-visible:ring-[#890b23]"
-                                    />
-                                </div>
-                            </div>
-
-                            <div className="grid gap-4 md:grid-cols-2">
-                                <div className="space-y-1">
-                                    <label
-                                        htmlFor="whatsapp-emp"
-                                        className="text-xs font-medium text-[#333]"
-                                    >
-                                        WhatsApp
-                                    </label>
-                                    <Input
-                                        id="whatsapp-emp"
-                                        name="whatsapp"
-                                        required
-                                        placeholder="(00) 00000-0000"
-                                        className="bg-neutral-50 border-neutral-200 focus-visible:ring-[#890b23]"
-                                    />
-                                </div>
-                                <div className="space-y-1">
-                                    <label
-                                        htmlFor="email-emp"
-                                        className="text-xs font-medium text-[#333]"
-                                    >
-                                        E-mail (opcional)
-                                    </label>
-                                    <Input
-                                        id="email-emp"
-                                        name="email"
-                                        type="email"
-                                        placeholder="contato@empresa.com"
-                                        className="bg-neutral-50 border-neutral-200 focus-visible:ring-[#890b23]"
-                                    />
-                                </div>
-                            </div>
-
-                            <div className="space-y-1">
-                                <label
-                                    htmlFor="contexto-emp"
-                                    className="text-xs font-medium text-[#333]"
-                                >
-                                    Resuma rapidamente sua operação
-                                </label>
-                                <Textarea
-                                    id="contexto-emp"
-                                    name="contexto"
-                                    placeholder="Ex.: Temos 2 unidades, frota própria, estoque relevante, atendemos em todo o Brasil..."
-                                    className="min-h-[80px] bg-neutral-50 border-neutral-200 focus-visible:ring-[#890b23] text-xs"
-                                />
-                            </div>
-
-                            <div className="space-y-2 pt-1">
-                                <Button
-                                    type="submit"
-                                    disabled={loadingEmp}
-                                    className="w-full bg-[#890b23] hover:bg-[#6d081b] text-white inline-flex items-center justify-center gap-2"
-                                >
-                                    {loadingEmp ? (
-                                        "Enviando..."
-                                    ) : (
-                                        <>
-                                            Quero falar sobre seguros para minha empresa
-                                            <ArrowRight className="w-4 h-4" />
-                                        </>
-                                    )}
-                                </Button>
-                                {msgEmp && (
-                                    <p className="text-[11px] text-[#555] leading-snug">
-                                        {msgEmp}
-                                    </p>
-                                )}
-                                <p className="text-[10px] text-[#777] leading-snug">
-                                    Seus dados serão usados apenas para contato relacionado a seguros
-                                    empresariais, conforme nossa política de privacidade.
-                                </p>
-                            </div>
-                        </form>
+                        <GenericForm
+                            fields={camposEmp}
+                            endpoint="/api/leads/empresas"
+                            origin="home_empresa"
+                            trackingType="lead"
+                            successMessage="Recebemos seus dados! Em breve entraremos em contato."
+                        />
                     )}
                 </div>
             </div>
