@@ -45,13 +45,11 @@ export function ChatWidget({ enabled = true }: ChatWidgetProps) {
                 onLoad={() => {
                     if (typeof window === "undefined") return;
 
-                    // @ts-expect-error - vem do script do Chatwoot
                     if (!window.chatwootSDK) {
                         console.error("Chatwoot SDK não encontrado em window.chatwootSDK");
                         return;
                     }
 
-                    // @ts-expect-error - vem do script do Chatwoot
                     window.chatwootSDK.run({
                         websiteToken: websiteToken,
                         baseUrl: baseUrl,
