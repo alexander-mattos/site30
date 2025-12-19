@@ -54,12 +54,14 @@ function categoryLabel(cat?: string) {
     return map[cat] ?? cat;
 }
 
+function ensureLeadingSlash(url: string): string;
+function ensureLeadingSlash(url?: string): string | undefined;
 function ensureLeadingSlash(url?: string) {
     if (!url) return undefined;
     return url.startsWith("/") ? url : `/${url}`;
 }
 
-function postCardImage(post: { slug: string; imageUrl?: string }) {
+function postCardImage(post: { slug: string; imageUrl?: string }): string {
     // se tem imagem no frontmatter, usa ela
     if (post.imageUrl) return ensureLeadingSlash(post.imageUrl);
 
