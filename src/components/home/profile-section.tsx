@@ -3,6 +3,7 @@
 
 import { Button } from "@/components/ui/button";
 import { BriefcaseBusiness, UserCheck } from "lucide-react";
+import CtaCotacaoOnline from "../actions/cta-cotacao-online";
 
 const ProfileSection = () => {
     const scrollToLeadCapture = () => {
@@ -127,6 +128,7 @@ const ProfileSection = () => {
                     </div>
                 </div>
             </div>
+            <CtaCotacaoOnline />
         </section>
     );
 };

@@ -173,3 +173,133 @@ h5,
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
   border-radius: 16px;
 }
+
+/* =========================================================
+   BLOG EDITORIAL PRESET — INTEGRO SEGUROS
+   ========================================================= */
+
+.blog-editorial {
+  /* nada aqui ainda — serve como escopo */
+}
+
+/* ---------- TEXTO BASE ---------- */
+.blog-editorial :where(p) {
+  margin-block: 1.1rem;
+  line-height: 1.75;
+}
+
+/* ---------- H2 COM ACCENT (SEÇÕES) ---------- */
+.blog-editorial :where(h2) {
+  position: relative;
+  padding-left: 0.9rem;
+  margin-top: 2.4rem;
+  margin-bottom: 0.9rem;
+}
+
+.blog-editorial :where(h2)::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.25em;
+  width: 4px;
+  height: 0.9em;
+  border-radius: 999px;
+  background: #C4162C;
+}
+
+/* ---------- H3 (SUBSEÇÕES) ---------- */
+.blog-editorial :where(h3) {
+  margin-top: 1.6rem;
+  margin-bottom: 0.7rem;
+}
+
+/* ---------- LISTAS ---------- */
+.blog-editorial :where(ul, ol) {
+  margin-block: 1.1rem;
+}
+.blog-editorial :where(li) {
+  margin-block: 0.35rem;
+}
+
+/* ---------- BLOCKQUOTE EDITORIAL ---------- */
+.blog-editorial :where(blockquote) {
+  margin-block: 2rem;
+  padding-left: 1.25rem;
+  border-left: 4px solid #C4162C;
+}
+
+.blog-editorial :where(blockquote p) {
+  margin: 0;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+/* ---------- LINKS COM SUBLINHADO BRAND ---------- */
+.blog-editorial :where(a) {
+  color: inherit;
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-color: rgba(196, 22, 44, 0.4);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+.blog-editorial :where(a:hover) {
+  color: #C4162C;
+  text-decoration-color: #C4162C;
+}
+
+/* ---------- HR ---------- */
+.blog-editorial :where(hr) {
+  margin-block: 2.5rem;
+}
+
+/* ---------- PRESET: ARTIGO LONGO ---------- */
+.blog-editorial[data-preset="long"] :where(h2) {
+  margin-top: 2.8rem;
+}
+.blog-editorial[data-preset="long"] :where(h3) {
+  margin-top: 2rem;
+}
+.blog-editorial[data-preset="long"] :where(p) {
+  margin-block: 1.25rem;
+}
+
+/* ---------- PRESET: ARTIGO CURTO ---------- */
+.blog-editorial[data-preset="short"] :where(h2) {
+  margin-top: 2rem;
+}
+.blog-editorial[data-preset="short"] :where(h3) {
+  margin-top: 1.4rem;
+}
+.blog-editorial[data-preset="short"] :where(p) {
+  margin-block: 0.95rem;
+}
+
+/* ---------- MOBILE ---------- */
+@media (max-width: 640px) {
+  .blog-editorial :where(p) {
+    margin-block: 0.9rem;
+  }
+
+  .blog-editorial :where(h2) {
+    margin-top: 1.8rem;
+    margin-bottom: 0.8rem;
+    padding-left: 0.8rem;
+  }
+
+  .blog-editorial :where(h3) {
+    margin-top: 1.25rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .blog-editorial :where(blockquote) {
+    margin-block: 1.5rem;
+    padding-left: 1rem;
+  }
+
+  .blog-editorial :where(hr) {
+    margin-block: 2rem;
+  }
+}

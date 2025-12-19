@@ -61,7 +61,7 @@ export function Header() {
                         </DropdownMenuTrigger>
                         <DropdownMenuContent
                             align="start"
-                            className="min-w-[240px] border-[#f0e2e5]"
+                            className="min-w-60 border-[#f0e2e5]"
                         >
                             <DropdownMenuLabel className="text-[11px] uppercase tracking-[0.14em] text-[#890b23]">
                                 Produtos principais
@@ -157,7 +157,7 @@ export function Header() {
 
                 {/* CTA DESKTOP */}
                 <div className="hidden md:flex items-center gap-3">
-                    <Link href="/client/login">
+                    <Link href="/auth/login">
                         <Button className="bg-[#890b23] hover:bg-[#6d081b] text-white font-semibold text-sm">
                             <User className="w-4 h-4 mr-1" />
                             Área do Cliente

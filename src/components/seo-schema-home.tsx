@@ -14,6 +14,10 @@ export function SeoSchemaHome() {
             {
                 "@type": "ContactPoint",
                 telephone: "+55-21-4121-6120",
+                postalCode: "20735-270",
+                streetAddress: "Rua Gustavo Gama, 245 - Méier",
+                addressLocality: "Rio de Janeiro",
+                addressRegion: "RJ",
                 contactType: "customer support",
                 areaServed: "BR",
                 availableLanguage: "pt-BR",

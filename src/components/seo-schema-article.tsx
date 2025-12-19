@@ -62,6 +62,8 @@ export function SeoSchemaArticle({
                 logo: {
                     "@type": "ImageObject",
                     url: publisherLogoUrl,
+                    width: 512,
+                    height: 512,
                 },
             }),
         },

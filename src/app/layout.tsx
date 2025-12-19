@@ -1,4 +1,10 @@
 import type { Metadata } from "next";
+import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
+import { TopBar } from "@/components/layout/TopBar";
+import { FloatingActions } from "@/components/layout/FloatingActions";
+import { ChatWootUserBinding } from "@/components/integrations/ChatWootUserBinding";
+import { ChatProvider } from "@/context/chat-context";
 import { AnalyticsScripts } from "@/components/analytics/analytics-scripts";
 import type { ReactNode } from "react";
 import { AuthProvider } from "@/components/auth/AuthProvider";
@@ -52,6 +58,12 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
+    nocache: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      nocache: true,
+    },
   },
   icons: {
     icon: "/favicon.ico",
@@ -111,11 +123,20 @@ export default function RootLayout({
       </head>
       <body className={`${poppins.variable} ${playfair.variable} antialiased`}>
         <AuthProvider>
-          {children}
-          <AnalyticsScripts />
+          <ChatProvider>
+            <div className="flex min-h-screen flex-col">
+              <TopBar />
+              <Header />
+              <main className="flex-1">{children}</main>
+              <Footer />
+              <ChatWootUserBinding />
+              <FloatingActions />
+            </div>
+            <AnalyticsScripts />
 
-          {/* Script SDK ChatWoot */}
-          <ChatWidget />
+            {/* Script SDK ChatWoot */}
+            <ChatWidget />
+          </ChatProvider>
         </AuthProvider>
       </body>
     </html>

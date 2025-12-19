@@ -2,6 +2,7 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import { notFound } from "next/navigation";
 
 export type BlogPostMeta = {
     title: string;
@@ -13,6 +14,8 @@ export type BlogPostMeta = {
     seoTitle?: string;
     seoDescription?: string;
     imageUrl?: string;
+    keywords?: string[];
+    readingTime?: number;
 };
 
 export type BlogPost = BlogPostMeta & {
@@ -38,22 +41,28 @@ function fileNameToSlug(fileName: string): string {
 
 export function getPostBySlug(
     slugParam: string | string[] | undefined
-): BlogPost | null {
-    // Garante que sempre vamos trabalhar com uma string simples
+): BlogPost {
     const slug = Array.isArray(slugParam) ? slugParam[0] : slugParam;
 
     if (!slug) {
-        // Se ainda assim não tiver slug, não tem o que fazer
-        return null;
+        notFound();
     }
 
     const realSlug = slug.replace(/\.mdx$/, "");
     const fullPath = path.join(BLOG_DIR, `${realSlug}.mdx`);
 
-    if (!fs.existsSync(fullPath)) return null;
+    if (!fs.existsSync(fullPath)) {
+        notFound();
+    }
 
     const fileContents = fs.readFileSync(fullPath, "utf8");
     const { data, content } = matter(fileContents);
+    const keywords = Array.isArray(data.keywords) ? data.keywords.map(String) : undefined;
+
+    const readingTime =
+        typeof data.readingTime === "number"
+            ? data.readingTime
+            : estimateReadingTimeMinutes(content);
 
     const meta: BlogPostMeta = {
         title: data.title ?? "",
@@ -65,6 +74,8 @@ export function getPostBySlug(
         seoTitle: data.seoTitle ?? undefined,
         seoDescription: data.seoDescription ?? undefined,
         imageUrl: data.imageUrl ?? undefined,
+        keywords,
+        readingTime,
     };
 
     return {
@@ -85,7 +96,16 @@ export function getAllPosts(): BlogPostMeta[] {
             const slug = fileNameToSlug(fileName);
             const fullPath = path.join(BLOG_DIR, fileName);
             const fileContents = fs.readFileSync(fullPath, "utf8");
-            const { data } = matter(fileContents);
+            const { data, content } = matter(fileContents);
+
+            const keywords = Array.isArray(data.keywords)
+                ? data.keywords.map(String)
+                : undefined;
+
+            const readingTime =
+                typeof data.readingTime === "number"
+                    ? data.readingTime
+                    : estimateReadingTimeMinutes(content);
 
             return {
                 title: data.title ?? "",
@@ -97,6 +117,8 @@ export function getAllPosts(): BlogPostMeta[] {
                 seoTitle: data.seoTitle ?? undefined,
                 seoDescription: data.seoDescription ?? undefined,
                 imageUrl: data.imageUrl ?? undefined,
+                keywords,
+                readingTime,
             } as BlogPostMeta;
         })
         .sort((a, b) => {
@@ -106,4 +128,14 @@ export function getAllPosts(): BlogPostMeta[] {
         });
 
     return posts;
+}
+
+function estimateReadingTimeMinutes(text: string) {
+    const words = text
+        .replace(/[#>*_`[\]()-]/g, " ")
+        .split(/\s+/)
+        .filter(Boolean).length;
+
+    const wpm = 220; // leitura média pt-BR ~200–230
+    return Math.max(1, Math.round(words / wpm));
 }
