@@ -18,7 +18,7 @@ import { useRouter } from "next/navigation"
 import { useState } from "react"
 
 interface UserActionsProps {
-    userId: number
+    userId: string
     userName: string
 }
 

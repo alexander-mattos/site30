@@ -1,8 +1,11 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { auth } from "@/lib/auth"
+// app/cliente/dashboard/page.tsx
 
-export default async function DashboardPage() {
-    const session = await auth()
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { requireAuth, requireRole } from "@/lib/auth-guards"
+
+export default async function ClienteDashboardPage() {
+    const { session } = await requireAuth()
+    await requireRole("CLIENT");
 
     return (
         <div className="space-y-8">

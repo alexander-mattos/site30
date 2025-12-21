@@ -1,13 +1,10 @@
-import { PrismaClient } from "@prisma/client"
+import { prisma } from "@/lib/prisma"
 import { NextResponse } from "next/server"
 import { auth } from "@/lib/auth"
-
-const prisma = new PrismaClient()
 
 export async function GET(req: Request) {
     const session = await auth()
 
-    // @ts-ignore
     if (session?.user?.role !== 'ADMIN') {
         return new NextResponse("Unauthorized", { status: 401 })
     }

@@ -21,14 +21,16 @@ export default function LoginPage() {
                 email,
                 password,
                 redirect: false,
+                callbackUrl: "/dashboard",
             })
 
             if (result?.error) {
                 setError("Credenciais inválidas. Tente novamente.")
             } else {
-                router.push("/client/dashboard")
+                router.push(result?.url ?? "/cliente/dashboard")
             }
         } catch (err) {
+            console.error(err)
             setError("Ocorreu um erro ao fazer login.")
         }
     }

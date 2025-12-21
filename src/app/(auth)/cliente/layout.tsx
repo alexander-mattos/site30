@@ -1,12 +1,16 @@
 import Link from "next/link"
-import { Button } from "@/components/ui/button"
 import { signOut } from "@/lib/auth"
+import { auth } from "@/lib/auth";
+import { redirect } from "next/navigation";
 
-export default function ClientLayout({
+export default async function ClientLayout({
     children,
 }: {
     children: React.ReactNode
 }) {
+    const session = await auth();
+    if (!session) redirect("/login");
+
     return (
         <div className="flex min-h-screen flex-col md:flex-row">
             {/* Sidebar */}
@@ -16,16 +20,16 @@ export default function ClientLayout({
                     <p className="text-sm text-primary-foreground/70">Área do Cliente</p>
                 </div>
                 <nav className="space-y-2 px-4">
-                    <Link href="/client/dashboard" className="block rounded-md px-4 py-2 hover:bg-white/10 transition-colors">
+                    <Link href="/cliente/dashboard" className="block rounded-md px-4 py-2 hover:bg-white/10 transition-colors">
                         Dashboard
                     </Link>
-                    <Link href="/client/products" className="block rounded-md px-4 py-2 hover:bg-white/10 transition-colors">
+                    <Link href="/cliente/products" className="block rounded-md px-4 py-2 hover:bg-white/10 transition-colors">
                         Meus Produtos
                     </Link>
                     <form
                         action={async () => {
                             "use server"
-                            await signOut({ redirectTo: "/client/login" })
+                            await signOut({ redirectTo: "/login" })
                         }}
                     >
                         <button type="submit" className="w-full text-left rounded-md px-4 py-2 hover:bg-red-900/50 text-red-300 hover:text-red-200 transition-colors">

@@ -1,10 +1,8 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { PrismaClient } from "@prisma/client"
+import { prisma } from "@/lib/prisma"
 import Link from "next/link"
 import { UserActions } from "./user-actions"
-
-const prisma = new PrismaClient()
 
 async function getUsers() {
     return await prisma.user.findMany({

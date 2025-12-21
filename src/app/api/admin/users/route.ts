@@ -1,14 +1,11 @@
-import { PrismaClient } from "@prisma/client"
+import { prisma } from "@/lib/prisma"
 import bcrypt from "bcryptjs"
 import { NextResponse } from "next/server"
 import { auth } from "@/lib/auth"
 
-const prisma = new PrismaClient()
-
 export async function POST(req: Request) {
     const session = await auth()
 
-    // @ts-ignore
     if (session?.user?.role !== 'ADMIN') {
         return new NextResponse("Unauthorized", { status: 401 })
     }
@@ -23,7 +20,7 @@ export async function POST(req: Request) {
             data: {
                 name,
                 email,
-                password: hashedPassword,
+                passwordHash: hashedPassword,
                 role,
             },
         })

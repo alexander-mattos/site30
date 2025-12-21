@@ -1,9 +1,7 @@
-import { PrismaClient } from "@prisma/client"
+import { prisma } from "@/lib/prisma"
 import { NextResponse } from "next/server"
 import { auth } from "@/lib/auth"
 import bcrypt from "bcryptjs"
-
-const prisma = new PrismaClient()
 
 // GET: Fetch a single user
 export async function GET(
@@ -20,7 +18,7 @@ export async function GET(
 
     try {
         const user = await prisma.user.findUnique({
-            where: { id: parseInt(id) },
+            where: { id },
         })
 
         if (!user) {
@@ -28,7 +26,7 @@ export async function GET(
         }
 
         // Remove password from response
-        const { password, ...userWithoutPassword } = user
+        const { passwordHash, ...userWithoutPassword } = user
 
         return NextResponse.json(userWithoutPassword)
     } catch (error) {
@@ -52,7 +50,7 @@ export async function PUT(
 
     try {
         const body = await request.json()
-        const { name, email, role, password } = body
+        const { name, email, role, passwordHash } = body
 
         const updateData: any = {
             name,
@@ -61,17 +59,17 @@ export async function PUT(
         }
 
         // Only update password if provided
-        if (password) {
-            const hashedPassword = await bcrypt.hash(password, 10)
+        if (passwordHash) {
+            const hashedPassword = await bcrypt.hash(passwordHash, 10)
             updateData.password = hashedPassword
         }
 
         const user = await prisma.user.update({
-            where: { id: parseInt(id) },
+            where: { id },
             data: updateData,
         })
 
-        const { password: _, ...userWithoutPassword } = user
+        const { passwordHash: _, ...userWithoutPassword } = user
 
         return NextResponse.json(userWithoutPassword)
     } catch (error) {
@@ -95,7 +93,7 @@ export async function DELETE(
 
     try {
         await prisma.user.delete({
-            where: { id: parseInt(id) },
+            where: { id },
         })
 
         return new NextResponse(null, { status: 204 })

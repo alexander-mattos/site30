@@ -1,8 +1,16 @@
 import type { Metadata } from "next";
+import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
+import { TopBar } from "@/components/layout/TopBar";
+import { FloatingActions } from "@/components/layout/FloatingActions";
+import { ChatWootUserBinding } from "@/components/integrations/ChatWootUserBinding";
+import { ChatProvider } from "@/context/chat-context";
 import { AnalyticsScripts } from "@/components/analytics/analytics-scripts";
 import type { ReactNode } from "react";
+import { AuthProvider } from "@/components/auth/AuthProvider";
 import { Poppins, Playfair_Display } from "next/font/google";
-import "./globals.css";
+import "../globals.css";
+import { ChatWidget } from "@/components/integrations/ChatWidget";
 
 export const poppins = Poppins({
   subsets: ["latin"],
@@ -96,7 +104,7 @@ const websiteJsonLd = {
   },
 };
 
-export default function RootLayout({
+export default function SiteLayout({
   children,
 }: Readonly<{
   children: ReactNode;
@@ -114,10 +122,22 @@ export default function RootLayout({
 
       </head>
       <body className={`${poppins.variable} ${playfair.variable} antialiased`}>
-        <div className="flex min-h-screen flex-col">
-          <main className="flex-1">{children}</main>
-        </div>
-        <AnalyticsScripts />
+        <AuthProvider>
+          <ChatProvider>
+            <div className="flex min-h-screen flex-col">
+              <TopBar />
+              <Header />
+              <main className="flex-1">{children}</main>
+              <Footer />
+              <ChatWootUserBinding />
+              <FloatingActions />
+            </div>
+            <AnalyticsScripts />
+
+            {/* Script SDK ChatWoot */}
+            <ChatWidget />
+          </ChatProvider>
+        </AuthProvider>
       </body>
     </html>
   );

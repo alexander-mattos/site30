@@ -1,13 +1,10 @@
-import { PrismaClient } from "@prisma/client"
+import { prisma } from "@/lib/prisma"
 import { NextResponse } from "next/server"
 import { auth } from "@/lib/auth"
-
-const prisma = new PrismaClient()
 
 export async function POST(req: Request) {
     const session = await auth()
 
-    // @ts-ignore
     if (session?.user?.role !== 'ADMIN') {
         return new NextResponse("Unauthorized", { status: 401 })
     }
@@ -18,7 +15,7 @@ export async function POST(req: Request) {
 
         const policy = await prisma.policy.create({
             data: {
-                userId: parseInt(userId),
+                userId: userId,
                 policyNumber,
                 type,
                 startDate: new Date(startDate),

@@ -1,15 +1,16 @@
 import { redirect } from "next/navigation";
-import { auth } from "@/lib/auth";
+import { requireAuth } from "@/lib/auth-guards";
 
 export default async function PrivateLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const session = await auth();
+  const session = await requireAuth();
+  
 
   if (!session) {
-    redirect("/auth/login");
+    redirect("/login");
   }
 
   return <>{children}</>;

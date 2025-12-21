@@ -157,7 +157,7 @@ export function Header() {
 
                 {/* CTA DESKTOP */}
                 <div className="hidden md:flex items-center gap-3">
-                    <Link href="/auth/login">
+                    <Link href="/login">
                         <Button className="bg-[#890b23] hover:bg-[#6d081b] text-white font-semibold text-sm">
                             <User className="w-4 h-4 mr-1" />
                             Área do Cliente
@@ -277,7 +277,7 @@ export function Header() {
                                 {/* CTA Área do Cliente + WhatsApp */}
                                 <div className="pt-2 border-t border-dashed border-[#e5e5e5] space-y-3">
                                     <SheetClose asChild>
-                                        <Link href="/client/login">
+                                        <Link href="/login">
                                             <Button className="w-full bg-[#890b23] hover:bg-[#6d081b] text-white text-sm">
                                                 Área do Cliente
                                             </Button>

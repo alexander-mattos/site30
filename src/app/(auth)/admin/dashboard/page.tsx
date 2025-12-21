@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { PrismaClient } from "@prisma/client"
+import { prisma } from "@/lib/prisma"
+import { requireRole } from "@/lib/auth-guards";
 
-const prisma = new PrismaClient()
 
 async function getStats() {
     const usersCount = await prisma.user.count()
@@ -10,6 +10,7 @@ async function getStats() {
 }
 
 export default async function AdminDashboardPage() {
+    await requireRole("ADMIN");
     const stats = await getStats()
 
     return (

@@ -48,7 +48,7 @@ export default function IntegroHeader() {
                     </div>
 
                     {/* Área do Cliente (desktop) */}
-                    <Link href="/client/login" className="hidden md:block">
+                    <Link href="/login" className="hidden md:block">
                         <Button
                             variant="outline"
                             className={`bg-white/90 hover:bg-white border-red-600 text-red-600 font-semibold transition-all duration-300 ${isScrolled ? 'text-sm py-2' : 'text-base py-3'
